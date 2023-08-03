@@ -4,7 +4,6 @@ import aws_cdk as cdk
 from constructs import Construct
 from stacks.baseinfra import NetworkConstruct
 from stacks.analytics import AnalyticsConstruct
-from stacks.portal import AdminPortalConstruct
 
 class OrionOnAWSStack(cdk.Stack):
   def __init__(self, scope: Construct, id:str, **kwargs):
@@ -12,7 +11,6 @@ class OrionOnAWSStack(cdk.Stack):
 
     network = NetworkConstruct(self,'Networking')
     analytics = AnalyticsConstruct(self,'Analytics', network=network)
-    #portal = AdminPortalConstruct(self,'AdminPortal', network=network)
 
 class OrionOnAWSApp(cdk.App):
   def __init__(self, **kwargs)->None:
