@@ -32,6 +32,7 @@ class NetworkConstruct(Construct, INetworkConstruct):
 
     self.vpc = ec2.Vpc(self,'Vpc',
       ip_addresses= ec2.IpAddresses.cidr(cidr_block='10.0.0.0/16'),
+      #availability_zones=['us-east-1a', 'us-east-1b', 'us-east-1c'],
       subnet_configuration=[        
         ec2.SubnetConfiguration(name='Public', subnet_type=ec2.SubnetType.PUBLIC, cidr_mask=24, map_public_ip_on_launch=True),        
         ec2.SubnetConfiguration(name='Default', subnet_type=ec2.SubnetType.PUBLIC, cidr_mask=24),

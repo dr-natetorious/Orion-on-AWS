@@ -1,0 +1,940 @@
+{
+ "Resources": {
+  "NetworkingVpc6B5E6F44": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/Resource"
+   }
+  },
+  "NetworkingVpcPublicSubnet1Subnet918289EE": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet1/Subnet"
+   }
+  },
+  "NetworkingVpcPublicSubnet1RouteTable8FB3C18A": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet1/RouteTable"
+   }
+  },
+  "NetworkingVpcPublicSubnet1RouteTableAssociationD13830EA": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet1RouteTable8FB3C18A"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet1/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcPublicSubnet1DefaultRoute80C01FA6": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet1RouteTable8FB3C18A"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet1/DefaultRoute"
+   }
+  },
+  "NetworkingVpcPublicSubnet2Subnet9D9E5AFB": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet2/Subnet"
+   }
+  },
+  "NetworkingVpcPublicSubnet2RouteTable22886677": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet2/RouteTable"
+   }
+  },
+  "NetworkingVpcPublicSubnet2RouteTableAssociation2D4CEA06": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet2RouteTable22886677"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet2/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcPublicSubnet2DefaultRouteDF98F60F": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet2RouteTable22886677"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet2/DefaultRoute"
+   }
+  },
+  "NetworkingVpcPublicSubnet3Subnet098EA884": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1c",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet3/Subnet"
+   }
+  },
+  "NetworkingVpcPublicSubnet3RouteTable7642FCEC": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/PublicSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet3/RouteTable"
+   }
+  },
+  "NetworkingVpcPublicSubnet3RouteTableAssociation3CB46B23": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet3RouteTable7642FCEC"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet3/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcPublicSubnet3DefaultRoute9501EF80": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcPublicSubnet3RouteTable7642FCEC"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/PublicSubnet3/DefaultRoute"
+   }
+  },
+  "NetworkingVpcDefaultSubnet1SubnetB82E54BA": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Default"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1/Subnet"
+   }
+  },
+  "NetworkingVpcDefaultSubnet1RouteTable562601DD": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1/RouteTable"
+   }
+  },
+  "NetworkingVpcDefaultSubnet1RouteTableAssociation9F0C774F": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet1RouteTable562601DD"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcDefaultSubnet1SubnetB82E54BA"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcDefaultSubnet1DefaultRoute96F7A3F1": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet1RouteTable562601DD"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet1/DefaultRoute"
+   }
+  },
+  "NetworkingVpcDefaultSubnet2Subnet70669CCF": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.4.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Default"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2/Subnet"
+   }
+  },
+  "NetworkingVpcDefaultSubnet2RouteTable95895BC4": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2/RouteTable"
+   }
+  },
+  "NetworkingVpcDefaultSubnet2RouteTableAssociation01C1A38D": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet2RouteTable95895BC4"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcDefaultSubnet2Subnet70669CCF"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcDefaultSubnet2DefaultRoute425C3B6C": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet2RouteTable95895BC4"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet2/DefaultRoute"
+   }
+  },
+  "NetworkingVpcDefaultSubnet3SubnetF06DE29F": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1c",
+    "CidrBlock": "10.0.5.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "Default"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3/Subnet"
+   }
+  },
+  "NetworkingVpcDefaultSubnet3RouteTableA9A5C49E": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3/RouteTable"
+   }
+  },
+  "NetworkingVpcDefaultSubnet3RouteTableAssociation3FEF9EB6": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet3RouteTableA9A5C49E"
+    },
+    "SubnetId": {
+     "Ref": "NetworkingVpcDefaultSubnet3SubnetF06DE29F"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3/RouteTableAssociation"
+   }
+  },
+  "NetworkingVpcDefaultSubnet3DefaultRoute53BCDF4C": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "RouteTableId": {
+     "Ref": "NetworkingVpcDefaultSubnet3RouteTableA9A5C49E"
+    }
+   },
+   "DependsOn": [
+    "NetworkingVpcVPCGW12E561D8"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/DefaultSubnet3/DefaultRoute"
+   }
+  },
+  "NetworkingVpcIGW21218DAB": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "Orion-on-AWS/Networking/Vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/IGW"
+   }
+  },
+  "NetworkingVpcVPCGW12E561D8": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "NetworkingVpcIGW21218DAB"
+    },
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/Vpc/VPCGW"
+   }
+  },
+  "NetworkingOpenSecurityGroup85B75EE5": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Default No SG",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     },
+     {
+      "CidrIpv6": "::/0",
+      "Description": "Allow all outbound ipv6 traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": {
+       "Fn::GetAtt": [
+        "NetworkingVpc6B5E6F44",
+        "CidrBlock"
+       ]
+      },
+      "Description": {
+       "Fn::Join": [
+        "",
+        [
+         "from ",
+         {
+          "Fn::GetAtt": [
+           "NetworkingVpc6B5E6F44",
+           "CidrBlock"
+          ]
+         },
+         ":443"
+        ]
+       ]
+      },
+      "FromPort": 443,
+      "IpProtocol": "tcp",
+      "ToPort": 443
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/OpenSecurityGroup/Resource"
+   }
+  },
+  "Networkings39CB40822": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1RouteTable8FB3C18A"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2RouteTable22886677"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3RouteTable7642FCEC"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet1RouteTable562601DD"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet2RouteTable95895BC4"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet3RouteTableA9A5C49E"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".s3"
+      ]
+     ]
+    },
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/s3/Resource"
+   }
+  },
+  "Networkingdynamodb0432E002": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "RouteTableIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1RouteTable8FB3C18A"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2RouteTable22886677"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3RouteTable7642FCEC"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet1RouteTable562601DD"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet2RouteTable95895BC4"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet3RouteTableA9A5C49E"
+     }
+    ],
+    "ServiceName": {
+     "Fn::Join": [
+      "",
+      [
+       "com.amazonaws.",
+       {
+        "Ref": "AWS::Region"
+       },
+       ".dynamodb"
+      ]
+     ]
+    },
+    "VpcEndpointType": "Gateway",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/dynamodb/Resource"
+   }
+  },
+  "NetworkingssmE28012B3": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NetworkingOpenSecurityGroup85B75EE5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-east-1.ssm",
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/ssm/Resource"
+   }
+  },
+  "Networkingec2messages7495AF5C": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NetworkingOpenSecurityGroup85B75EE5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-east-1.ec2messages",
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/ec2messages/Resource"
+   }
+  },
+  "Networkingec27755BEAE": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NetworkingOpenSecurityGroup85B75EE5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-east-1.ec2",
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/ec2/Resource"
+   }
+  },
+  "NetworkingssmmessagesFDCB3B3F": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NetworkingOpenSecurityGroup85B75EE5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-east-1.ssmmessages",
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/ssmmessages/Resource"
+   }
+  },
+  "NetworkinglogsF2029CE6": {
+   "Type": "AWS::EC2::VPCEndpoint",
+   "Properties": {
+    "PrivateDnsEnabled": true,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "NetworkingOpenSecurityGroup85B75EE5",
+       "GroupId"
+      ]
+     }
+    ],
+    "ServiceName": "com.amazonaws.us-east-1.logs",
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcPublicSubnet1Subnet918289EE"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet2Subnet9D9E5AFB"
+     },
+     {
+      "Ref": "NetworkingVpcPublicSubnet3Subnet098EA884"
+     }
+    ],
+    "VpcEndpointType": "Interface",
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Networking/logs/Resource"
+   }
+  },
+  "AnalyticsRedshiftDefaultRole9116E22C": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "redshift.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Description": "Default role for Orion-On-AWS Redshift cluster",
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonRedshiftAllCommandsFullAccess"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Analytics/Redshift/DefaultRole/Resource"
+   }
+  },
+  "AnalyticsRedshiftNamespace6DED2728": {
+   "Type": "AWS::RedshiftServerless::Namespace",
+   "Properties": {
+    "AdminUserPassword": "K3lck3k5lcz1k2",
+    "AdminUsername": "admin",
+    "DbName": "dev",
+    "DefaultIamRoleArn": {
+     "Fn::GetAtt": [
+      "AnalyticsRedshiftDefaultRole9116E22C",
+      "Arn"
+     ]
+    },
+    "IamRoles": [
+     {
+      "Fn::GetAtt": [
+       "AnalyticsRedshiftDefaultRole9116E22C",
+       "Arn"
+      ]
+     }
+    ],
+    "NamespaceName": "orion-on-aws"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Analytics/Redshift/Namespace"
+   }
+  },
+  "AnalyticsRedshiftDefaultSecurityGroup133EB3B8": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Default Security Group for RedshiftConstruct",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "NetworkingVpc6B5E6F44"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Analytics/Redshift/DefaultSecurityGroup/Resource"
+   }
+  },
+  "AnalyticsRedshiftDefaultWorkgroup715EA35E": {
+   "Type": "AWS::RedshiftServerless::Workgroup",
+   "Properties": {
+    "BaseCapacity": 8,
+    "EnhancedVpcRouting": true,
+    "NamespaceName": "orion-on-aws",
+    "PubliclyAccessible": false,
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "AnalyticsRedshiftDefaultSecurityGroup133EB3B8",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetIds": [
+     {
+      "Ref": "NetworkingVpcDefaultSubnet1SubnetB82E54BA"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet2Subnet70669CCF"
+     },
+     {
+      "Ref": "NetworkingVpcDefaultSubnet3SubnetF06DE29F"
+     }
+    ],
+    "WorkgroupName": "orion-on-aws-default"
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/Analytics/Redshift/DefaultWorkgroup"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WOQU+EMBCFf8veS3XxosfNxmy8GAJmPZpSBhmBlrRTN6Tpf7ddcNHTvPn6pu/l/PGJ3+/ExWay6bMBa+4rErJnEX14kDn350myY6vOxZEVrh5QVq5WQIltqtSO4E3UA2x8YwdrtURBqNXNnMSLIjDReRIEFzGvMet2oFikG0ERq0A6gzSfjHbTNeAfWA9i0WfVTBoVrT/d1mtQKyT88QSGYuS+1EvnNAMz0NgOW7JgvsEMYC338fFVjGCneJ+c79r0nyk4BFaC1c4s/FcHVszUaXX3wPd7nu++LGJmnCIcgZfL/AEFnNTFeQEAAA=="
+   },
+   "Metadata": {
+    "aws:cdk:path": "Orion-on-AWS/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+ }
+}

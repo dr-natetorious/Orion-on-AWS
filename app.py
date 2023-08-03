@@ -12,13 +12,13 @@ class OrionOnAWSStack(cdk.Stack):
 
     network = NetworkConstruct(self,'Networking')
     analytics = AnalyticsConstruct(self,'Analytics', network=network)
-    portal = AdminPortalConstruct(self,'AdminPortal', network=network)
+    #portal = AdminPortalConstruct(self,'AdminPortal', network=network)
 
 class OrionOnAWSApp(cdk.App):
   def __init__(self, **kwargs)->None:
     super().__init__(**kwargs)
 
-    env = cdk.Environment(account='995765563608', region='us-west-2')
+    env = cdk.Environment(account='995765563608', region='us-east-1')
     OrionOnAWSStack(self,'Orion-on-AWS', env=env)
 
 app = OrionOnAWSApp()
