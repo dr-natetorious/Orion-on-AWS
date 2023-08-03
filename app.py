@@ -12,7 +12,7 @@ class OrionOnAWSStack(cdk.Stack):
 
     network = NetworkConstruct(self,'Networking')
     analytics = AnalyticsConstruct(self,'Analytics', network=network)
-    #portal = AdminPortalConstruct(self,'AdminPortal', network=network)
+    portal = AdminPortalConstruct(self,'AdminPortal', network=network)
 
 class OrionOnAWSApp(cdk.App):
   def __init__(self, **kwargs)->None:
