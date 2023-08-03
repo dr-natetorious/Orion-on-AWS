@@ -18,7 +18,7 @@ class OrionOnAWSApp(cdk.App):
   def __init__(self, **kwargs)->None:
     super().__init__(**kwargs)
 
-    env = cdk.Environment(account='995765563608', region='us-east-1')
+    env = cdk.Environment(account='123123123123', region='us-east-1')
     OrionOnAWSStack(self,'Orion-on-AWS', env=env)
 
 app = OrionOnAWSApp()
